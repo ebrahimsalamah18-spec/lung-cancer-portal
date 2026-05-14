@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>بوابة الوعي بسرطان الرئة</title>
+    <style>
+        /* تعريف الألوان والخطوط */
+        :root {
+            --bg-light: #f0f8f9;
+            --primary-teal: #008080;
+            --dark-teal: #1a3c40;
+            --accent-blue: #4db6ac;
+            --locked-grey: #2c3e50;
+            --white: #ffffff;
+        }
+
+        * {
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-light);
+            background-image: radial-gradient(circle at top left, #d1eef0 0%, transparent 20%),
+                              radial-gradient(circle at bottom right, #d1eef0 0%, transparent 20%);
+            margin: 0;
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        /* الهيدر والعناوين */
+        .header {
+            width: 100%;
+            text-align: center;
+            padding: 20px 0;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            color: black;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .header h1 span {
+            color: var(--primary-teal);
+        }
+
+        /* حاوية الكروت */
+        .cards-container {
+            display: grid;
+            grid-template-columns: 1fr; /* عمود واحد للموبايل بشكل افتراضي */
+            gap: 15px;
+            width: 100%;
+            max-width: 500px;
+            margin-top: 20px;
+        }
+
+        /* تصميم الكارت */
+        .card {
+            background: var(--locked-grey);
+            border-radius: 15px;
+            padding: 25px;
+            color: white;
+            text-align: center;
+            position: relative;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            min-height: 180px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* الكارت المفتوح (النشط) */
+        .card.unlocked {
+            background: var(--white);
+            color: var(--locked-grey);
+            border: 2px solid var(--locked-grey);
+        }
+
+        .card.unlocked h2 {
+            color: black;
+            border-bottom: 2px solid #ccc;
+            padding-bottom: 5px;
+            margin-bottom: 10px;
+        }
+
+        .card h2 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+
+        .card .lock-icon {
+            font-size: 30px;
+            margin-bottom: 10px;
+        }
+
+        .card .instruction {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            margin-bottom: 15px;
+        }
+
+        .card .content-text {
+            display: none;
+            font-size: 1rem;
+            line-height: 1.6;
+            text-align: right;
+        }
+
+        /* إظهار المحتوى عند الفتح */
+        .card.open .content-text {
+            display: block;
+        }
+        
+        .card.open .lock-icon, .card.open .instruction {
+            display: none;
+        }
+
+        .footer-text {
+            margin-top: 30px;
+            font-size: 1.1rem;
+            color: #333;
+            text-align: center;
+        }
+
+        /* تحسينات للشاشات الأكبر (مثل التابلت) */
+        @media (min-width: 768px) {
+            .cards-container {
+                grid-template-columns: repeat(2, 1fr);
+                max-width: 900px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <h1>سرطان الرئة 🫁</h1>
+    </div>
+
+    <div class="cards-container">
+        <div class="card unlocked" id="card-0" onclick="handleCardClick(0)">
+            <h2>التعريف</h2>
+            <p class="instruction">ما هو سرطان الرئة؟</p>
+            <div class="content-text">
+                هو نمو غير طبيعي للخلايا في أنسجة الرئة، مما يعيق قدرتها على تزويد الجسم بالأكسجين.
+            </div>
+        </div>
+
+        <div class="card" id="card-1" onclick="handleCardClick(1)">
+            <div class="lock-icon">🔒</div>
+            <p class="instruction">افتح "التعريف" أولاً لفتح هذه الخانة</p>
+            <h2>الأسباب</h2>
+            <div class="content-text">
+                التدخين (بكل أنواعه) هو السبب الأول، يليه تلوث الهواء، والتعرض للمواد الكيميائية مثل الأسبستوس.
+            </div>
+        </div>
+
+        <div class="card" id="card-2" onclick="handleCardClick(2)">
+            <div class="lock-icon">🔒</div>
+            <p class="instruction">افتح "الأسباب" أولاً لفتح هذه الخانة</p>
+            <h2>شخصيات أصيبت</h2>
+            <div class="content-text">
+                الفنان الكبير أحمد زكي، والفنان الراحل نور الشريف، كلاهما خاضا معارك شجاعة ضد هذا المرض.
+            </div>
+        </div>
+
+        <div class="card" id="card-3" onclick="handleCardClick(3)">
+            <div class="lock-icon">🔒</div>
+            <p class="instruction">افتح "الشخصيات" أولاً لفتح هذه الخانة</p>
+            <h2>الأعراض</h2>
+            <div class="content-text">
+                سعال مستمر، ضيق تنفس، ألم في الصدر، وفقدان الوزن المفاجئ. استشر الطبيب فوراً عند ظهورها.
+            </div>
+        </div>
+    </div>
+
+    <p class="footer-text">يرجى اتباع الترتيب لفتح جميع الأقسام</p>
+
+    <script>
+        function handleCardClick(index) {
+            const currentCard = document.getElementById(`card-${index}`);
+
+            // إذا كان الكارت مقفلاً، لا تفعل شيئاً
+            if (!currentCard.classList.contains('unlocked')) return;
+
+            // فتح محتوى الكارت الحالي
+            currentCard.classList.add('open');
+
+            // فتح القفل عن الكارت التالي
+            if (index < 3) {
+                const nextCard = document.getElementById(`card-${index + 1}`);
+                nextCard.classList.add('unlocked');
+            }
+        }
+    </script>
+</body>
+</html>
